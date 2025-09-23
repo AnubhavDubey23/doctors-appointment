@@ -1,0 +1,100 @@
+{
+  "testUsers": [
+    {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "password123",
+      "phone": "+1234567890",
+      "address": "123 Main St, City, State",
+      "gender": "Male",
+      "dob": "1990-01-01"
+    },
+    {
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "password": "password123",
+      "phone": "+1234567891",
+      "address": "456 Oak Ave, City, State",
+      "gender": "Female",
+      "dob": "1985-05-15"
+    }
+  ],
+  "testDoctors": [
+    {
+      "name": "Dr. Sarah Wilson",
+      "email": "sarah@example.com",
+      "password": "doctor123",
+      "speciality": "Cardiologist",
+      "degree": "MD Cardiology",
+      "experience": "10 Years",
+      "about": "Experienced cardiologist specializing in heart diseases",
+      "fees": 100,
+      "address": "789 Medical Center, City, State"
+    },
+    {
+      "name": "Dr. Michael Brown",
+      "email": "michael@example.com",
+      "password": "doctor123",
+      "speciality": "Dermatologist",
+      "degree": "MD Dermatology",
+      "experience": "8 Years",
+      "about": "Expert in skin conditions and cosmetic procedures",
+      "fees": 80,
+      "address": "321 Skin Clinic, City, State"
+    }
+  ],
+  "testAdmin": {
+    "email": "admin@prescripto.com",
+    "password": "admin123"
+  },
+  "testAppointments": [
+    {
+      "slotDate": "2024-01-15",
+      "slotTime": "10:00 am",
+      "amount": 100
+    },
+    {
+      "slotDate": "2024-01-16",
+      "slotTime": "2:00 pm",
+      "amount": 80
+    }
+  ],
+  "testMedicalConditions": [
+    {
+      "condition": "Hypertension",
+      "diagnosedDate": "2023-06-01",
+      "severity": "Moderate",
+      "medications": ["Lisinopril 10mg"],
+      "notes": "Blood pressure controlled with medication"
+    },
+    {
+      "condition": "Diabetes Type 2",
+      "diagnosedDate": "2022-03-15",
+      "severity": "Mild",
+      "medications": ["Metformin 500mg"],
+      "notes": "Well controlled with diet and medication"
+    }
+  ],
+  "testReviews": [
+    {
+      "rating": 5,
+      "comment": "Excellent doctor, very professional and caring",
+      "categories": {
+        "communication": 5,
+        "punctuality": 5,
+        "treatment": 5,
+        "facilities": 4
+      }
+    },
+    {
+      "rating": 4,
+      "comment": "Good experience overall, would recommend",
+      "categories": {
+        "communication": 4,
+        "punctuality": 4,
+        "treatment": 5,
+        "facilities": 4
+      }
+    }
+  ]
+}

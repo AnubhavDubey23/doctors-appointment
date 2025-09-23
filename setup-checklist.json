@@ -1,0 +1,81 @@
+{
+  "setupChecklist": {
+    "prerequisites": [
+      {
+        "item": "Node.js (v16+)",
+        "description": "Download from nodejs.org",
+        "required": true
+      },
+      {
+        "item": "MongoDB",
+        "description": "Local installation or MongoDB Atlas account",
+        "required": true
+      },
+      {
+        "item": "Git",
+        "description": "For version control",
+        "required": false
+      }
+    ],
+    "thirdPartyServices": [
+      {
+        "service": "MongoDB",
+        "description": "Database service",
+        "setup": "Install locally or create MongoDB Atlas account",
+        "required": true
+      },
+      {
+        "service": "Cloudinary",
+        "description": "Image and file storage",
+        "setup": "Create account at cloudinary.com and get API credentials",
+        "required": true
+      },
+      {
+        "service": "Stripe",
+        "description": "Payment processing",
+        "setup": "Create account at stripe.com and get API keys",
+        "required": true
+      },
+      {
+        "service": "Razorpay",
+        "description": "Alternative payment gateway",
+        "setup": "Create account at razorpay.com and get API keys",
+        "required": false
+      },
+      {
+        "service": "Gmail",
+        "description": "Email notifications",
+        "setup": "Enable 2FA and create app-specific password",
+        "required": true
+      },
+      {
+        "service": "Twilio",
+        "description": "SMS notifications",
+        "setup": "Create account at twilio.com and get credentials",
+        "required": true
+      }
+    ],
+    "installationSteps": [
+      "Extract ZIP file to desired location",
+      "Navigate to backend folder and run 'npm install'",
+      "Navigate to frontend folder and run 'npm install'",
+      "Navigate to admin folder and run 'npm install'",
+      "Create .env files in each directory using .env.example templates",
+      "Configure all third-party service credentials",
+      "Start MongoDB service (if running locally)",
+      "Run backend server: 'cd backend && npm run server'",
+      "Run frontend: 'cd frontend && npm run dev'",
+      "Run admin panel: 'cd admin && npm run dev'"
+    ],
+    "postInstallation": [
+      "Access patient portal at http://localhost:5173",
+      "Access admin panel at http://localhost:5174",
+      "Login to admin panel with default credentials",
+      "Add doctors through admin panel",
+      "Test appointment booking flow",
+      "Verify email and SMS notifications",
+      "Test payment integration",
+      "Configure production environment variables for deployment"
+    ]
+  }
+}
