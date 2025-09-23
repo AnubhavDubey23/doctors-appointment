@@ -64,7 +64,7 @@ export default function HomePage() {
             </div>
             <nav className="hidden md:flex space-x-8">
               <a
-                href="http://localhost:5173"
+                href="https://main.d254ex9ucnrxen.amplifyapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-blue-600 transition-colors"
@@ -72,7 +72,7 @@ export default function HomePage() {
                 Patient Portal
               </a>
               <a
-                href="http://localhost:5174"
+                href="https://main.dbxrmz4cah3xb.amplifyapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-blue-600 transition-colors"
@@ -101,7 +101,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="http://localhost:5173"
+                href="https://main.d254ex9ucnrxen.amplifyapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors inline-block text-center"
@@ -109,7 +109,7 @@ export default function HomePage() {
                 Book Appointment Now
               </a>
               <a
-                href="http://localhost:5173"
+                href="https://main.d254ex9ucnrxen.amplifyapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors inline-block text-center"
@@ -182,7 +182,7 @@ export default function HomePage() {
                 Book appointments, chat with doctors, manage your medical records, and access telemedicine services.
               </p>
               <a
-                href="http://localhost:5173"
+                href="https://main.d254ex9ucnrxen.amplifyapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block"
@@ -199,7 +199,7 @@ export default function HomePage() {
                 Manage doctors, view analytics, handle appointments, and oversee the entire healthcare system.
               </p>
               <a
-                href="http://localhost:5174"
+                href="https://main.dbxrmz4cah3xb.amplifyapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-block"

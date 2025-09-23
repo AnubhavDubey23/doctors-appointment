@@ -645,9 +645,9 @@ Doctor: sarah.wilson@hospital.com / doctor123
 User: user1@example.com / password123
 
 🌐 Access URLs:
-- Patient Portal: http://localhost:5173
-- Admin Panel: http://localhost:5174
-- Backend API: http://localhost:4000
+- Patient Portal: https://main.d254ex9ucnrxen.amplifyapp.com/
+- Admin Panel: https://main.dbxrmz4cah3xb.amplifyapp.com/
+- Backend API: http://project1-env.eba-vxxam83j.us-east-1.elasticbeanstalk.com/
     `)
 
   } catch (error) {
