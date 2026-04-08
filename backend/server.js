@@ -30,10 +30,27 @@ connectCloudinary()
 
 app.use(express.json())
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || 'http://localhost:5173',
-    process.env.ADMIN_URL || 'http://localhost:5174'
-  ]
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      process.env.ADMIN_URL,
+      'http://localhost:5173',
+      'http://localhost:5174'
+    ].filter(Boolean)
+
+    // Allow requests with no origin (mobile apps, Postman, curl, etc.)
+    if (!origin) return callback(null, true)
+
+    // Allow if origin matches exactly or is a Vercel preview URL for this project
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app')
+    ) {
+      return callback(null, true)
+    }
+
+    callback(new Error('Not allowed by CORS'))
+  }
 }))
 
 app.use("/api/user", userRouter)
