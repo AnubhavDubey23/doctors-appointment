@@ -1,11 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-    font-family: Outfit;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+html {
+    @apply bg-background;
+}
+
+body {
+    @apply text-text-primary;
+    line-height: 1.5;
 }
 
 .active hr {
@@ -13,11 +22,23 @@
 }
 
 @media (max-width:740px) {
-    .active  p{
+    .active p {
        @apply text-white bg-primary
     }
 }
 
 ::-webkit-scrollbar {
     @apply hidden
+}
+
+/* Smooth animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

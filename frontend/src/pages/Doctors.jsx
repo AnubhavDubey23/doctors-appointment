@@ -1,8 +1,7 @@
-"use client"
-
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import { useNavigate, useParams } from "react-router-dom"
+import { motion } from "framer-motion"
 
 const Doctors = () => {
   const { speciality } = useParams()
@@ -155,20 +154,30 @@ const Doctors = () => {
 
   return (
     <div>
-      <div className="mb-6">
-        <p className="text-gray-600 mb-4">Browse through the doctors specialist.</p>
+      <div className="mb-8 px-4 md:px-0">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className='mb-8'
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-2">
+            Find Your Doctor
+          </h1>
+          <p className="text-text-secondary text-lg">Browse through our network of specialists and book your appointment.</p>
+        </motion.div>
 
         {/* Search Bar */}
-        <div className="relative mb-4">
+        <div className="relative mb-6">
           <input
             type="text"
             placeholder="Search doctors by name, speciality, or location..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-5 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white text-text-primary placeholder-text-secondary"
           />
           <svg
-            className="absolute left-3 top-3.5 h-5 w-5 text-gray-400"
+            className="absolute left-4 top-3.5 h-5 w-5 text-text-secondary"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -184,12 +193,16 @@ const Doctors = () => {
 
         {/* Sort and Filter Controls */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 flex-wrap">
             <button
               onClick={() => setShowFilter(!showFilter)}
-              className={`py-2 px-4 border rounded-lg text-sm transition-all ${showFilter ? "bg-blue-600 text-white" : "bg-white text-gray-700 hover:bg-gray-50"}`}
+              className={`py-2.5 px-5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
+                showFilter
+                  ? "bg-primary text-white"
+                  : "bg-gray-100 text-text-primary hover:bg-gray-200"
+              }`}
             >
-              <svg className="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -200,17 +213,20 @@ const Doctors = () => {
               Filters
             </button>
 
-            <button onClick={clearFilters} className="py-2 px-4 text-sm text-gray-600 hover:text-gray-800">
+            <button
+              onClick={clearFilters}
+              className="py-2.5 px-5 text-sm font-medium text-text-secondary hover:text-primary hover:bg-gray-100 rounded-lg transition-all"
+            >
               Clear All
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
-            <label className="text-sm text-gray-600">Sort by:</label>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-text-secondary">Sort by:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary bg-white"
             >
               <option value="name">Name</option>
               <option value="experience">Experience</option>
@@ -222,15 +238,18 @@ const Doctors = () => {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row items-start gap-5">
+      <div className="flex flex-col lg:flex-row items-start gap-6">
         {/* Advanced Filters Panel */}
         <div className={`w-full lg:w-80 ${showFilter ? "block" : "hidden lg:block"}`}>
-          <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-4">
-            <h3 className="font-semibold text-gray-800 mb-4">Filters</h3>
+          <div className="bg-white border border-gray-100 rounded-xl p-6 space-y-6 shadow-soft">
+            <h3 className="font-bold text-text-primary text-lg mb-4 flex items-center gap-2">
+              <div className="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full"></div>
+              Filters
+            </h3>
 
             {/* Speciality Filter */}
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Speciality</h4>
+            <div className="border-b border-gray-100 pb-4">
+              <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">Speciality</h4>
               <div className="space-y-2">
                 {[
                   "General physician",
@@ -243,8 +262,10 @@ const Doctors = () => {
                   <button
                     key={spec}
                     onClick={() => (speciality === spec ? navigate("/doctors") : navigate(`/doctors/${spec}`))}
-                    className={`w-full text-left px-3 py-2 text-sm border border-gray-300 rounded transition-all ${
-                      speciality === spec ? "bg-blue-50 text-blue-700 border-blue-300" : "hover:bg-gray-50"
+                    className={`w-full text-left px-3 py-2.5 text-sm rounded-lg transition-all ${
+                      speciality === spec
+                        ? "bg-primary text-white font-medium"
+                        : "bg-gray-50 text-text-primary hover:bg-gray-100 hover:text-primary"
                     }`}
                   >
                     {spec}
@@ -254,12 +275,12 @@ const Doctors = () => {
             </div>
 
             {/* Availability Filter */}
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Availability</h4>
+            <div className="border-b border-gray-100 pb-4">
+              <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">Availability</h4>
               <select
                 value={filters.availability}
                 onChange={(e) => handleFilterChange("availability", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
               >
                 <option value="all">All</option>
                 <option value="available">Available</option>
@@ -268,12 +289,12 @@ const Doctors = () => {
             </div>
 
             {/* Experience Filter */}
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Experience</h4>
+            <div className="border-b border-gray-100 pb-4">
+              <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">Experience</h4>
               <select
                 value={filters.experience}
                 onChange={(e) => handleFilterChange("experience", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
               >
                 <option value="all">All</option>
                 <option value="0-5">0-5 years</option>
@@ -284,12 +305,12 @@ const Doctors = () => {
             </div>
 
             {/* Rating Filter */}
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Minimum Rating</h4>
+            <div className="border-b border-gray-100 pb-4">
+              <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">Minimum Rating</h4>
               <select
                 value={filters.rating}
                 onChange={(e) => handleFilterChange("rating", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
               >
                 <option value="all">All</option>
                 <option value="4">4+ Stars</option>
@@ -300,12 +321,12 @@ const Doctors = () => {
             </div>
 
             {/* Fees Filter */}
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Consultation Fees</h4>
+            <div className="border-b border-gray-100 pb-4">
+              <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">Consultation Fees</h4>
               <select
                 value={filters.fees}
                 onChange={(e) => handleFilterChange("fees", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
               >
                 <option value="all">All</option>
                 <option value="low">Under ₹500</option>
@@ -315,12 +336,12 @@ const Doctors = () => {
             </div>
 
             {/* Gender Filter */}
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Gender</h4>
+            <div className="border-b border-gray-100 pb-4">
+              <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">Gender</h4>
               <select
                 value={filters.gender}
                 onChange={(e) => handleFilterChange("gender", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
               >
                 <option value="all">All</option>
                 <option value="male">Male</option>
@@ -331,11 +352,11 @@ const Doctors = () => {
             {/* Location Filter */}
             {locations.length > 0 && (
               <div>
-                <h4 className="font-medium text-gray-700 mb-2">Location</h4>
+                <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">Location</h4>
                 <select
                   value={filters.location}
                   onChange={(e) => handleFilterChange("location", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
                 >
                   <option value="all">All Locations</option>
                   {locations.map((location) => (
@@ -351,76 +372,96 @@ const Doctors = () => {
 
         {/* Results */}
         <div className="flex-1">
-          <div className="mb-4 flex items-center justify-between">
-            <p className="text-gray-600">
-              Showing {filterDoc.length} doctor{filterDoc.length !== 1 ? "s" : ""}
+          <div className="mb-6 flex items-center justify-between">
+            <p className="text-text-secondary font-medium">
+              Showing <span className="text-primary font-bold">{filterDoc.length}</span> doctor{filterDoc.length !== 1 ? "s" : ""}
               {searchQuery && ` for "${searchQuery}"`}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filterDoc.length === 0 ? (
-              <div className="col-span-full text-center py-12">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">No doctors found</h3>
-                <p className="text-gray-500">Try adjusting your search criteria or filters</p>
+              <div className="col-span-full text-center py-16">
+                <div className="flex justify-center mb-4">
+                  <svg className="w-16 h-16 text-text-secondary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-text-primary mb-2">No doctors found</h3>
+                <p className="text-text-secondary mb-6">Try adjusting your search criteria or filters</p>
                 <button
                   onClick={clearFilters}
-                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 font-medium transition-all"
                 >
                   Clear Filters
                 </button>
               </div>
             ) : (
               filterDoc.map((item, index) => (
-                <div
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: (index % 3) * 0.1 }}
+                  whileHover={{ y: -8 }}
                   onClick={() => {
                     navigate(`/appointment/${item._id}`)
-                    scrollTo(0, 0)
+                    window.scrollTo(0, 0)
                   }}
-                  className="border border-gray-200 rounded-xl overflow-hidden cursor-pointer hover:shadow-lg hover:translate-y-[-2px] transition-all duration-300"
-                  key={index}
+                  className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-lg border border-gray-100 cursor-pointer transition-all group"
                 >
-                  <img
-                    className="bg-gray-50 w-full h-48 object-cover"
-                    src={item.image || "/placeholder.svg"}
-                    alt={item.name}
-                  />
-                  <div className="p-4">
-                    <div
-                      className={`flex items-center gap-2 text-sm mb-2 ${item.available ? "text-green-600" : "text-gray-500"}`}
-                    >
-                      <div className={`w-2 h-2 rounded-full ${item.available ? "bg-green-500" : "bg-gray-400"}`}></div>
-                      <span>{item.available ? "Available" : "Not Available"}</span>
+                  {/* Image Container */}
+                  <div className="relative overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 aspect-square">
+                    <img
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.name}
+                    />
+                    
+                    {/* Availability Badge */}
+                    <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 backdrop-blur-sm ${
+                      item.available
+                        ? 'bg-success/90 text-white animate-pulse-soft'
+                        : 'bg-gray-400/90 text-white'
+                    }`}>
+                      <span className={`w-2 h-2 rounded-full ${item.available ? 'bg-white' : 'bg-white/50'}`}></span>
+                      {item.available ? 'Available' : 'Not Available'}
                     </div>
+                  </div>
 
-                    <h3 className="text-gray-900 text-lg font-semibold mb-1">{item.name}</h3>
-                    <p className="text-gray-600 text-sm mb-2">{item.speciality}</p>
+                  {/* Content */}
+                  <div className="p-5">
+                    <h3 className="text-lg font-semibold text-text-primary mb-1 group-hover:text-primary transition-colors line-clamp-1">
+                      {item.name}
+                    </h3>
+                    <p className="text-sm text-text-secondary mb-3 font-medium">
+                      {item.speciality}
+                    </p>
 
-                    <div className="flex items-center justify-between text-sm text-gray-500">
+                    {/* Rating and Experience */}
+                    <div className="flex items-center justify-between text-xs text-text-secondary mb-3 border-t border-gray-100 pt-3">
                       <div className="flex items-center gap-1">
                         {item.averageRating ? (
                           <>
                             <span className="text-yellow-400">★</span>
-                            <span>{item.averageRating}</span>
+                            <span className="font-medium">{item.averageRating}</span>
                             <span>({item.totalReviews || 0})</span>
                           </>
                         ) : (
-                          <span>No reviews</span>
+                          <span className="text-gray-500">No reviews</span>
                         )}
                       </div>
-
-                      {item.experience && <span>{item.experience} yrs exp</span>}
+                      {item.experience && <span className="font-medium">{item.experience} yrs</span>}
                     </div>
 
+                    {/* Fees */}
                     {item.fees && (
-                      <div className="mt-2 text-right">
-                        <span className="text-lg font-semibold text-green-600">₹{item.fees}</span>
-                        <span className="text-sm text-gray-500 ml-1">consultation</span>
+                      <div className="text-primary font-bold text-lg">
+                        ₹{item.fees} <span className="text-text-secondary text-xs font-normal">per session</span>
                       </div>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))
             )}
           </div>

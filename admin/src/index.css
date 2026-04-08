@@ -1,12 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    font-family: Outfit;
+* {
+    font-family: 'Inter', system-ui, sans-serif;
 }
 
-::-webkit-scrollbar{
+html {
+    @apply bg-background;
+}
+
+body {
+    @apply text-text-primary;
+    line-height: 1.5;
+}
+
+::-webkit-scrollbar {
     display: none;
 }

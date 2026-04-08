@@ -1,98 +1,68 @@
-"use client"
-
 import { useContext } from "react"
 import { assets } from "../assets/assets"
 import { NavLink } from "react-router-dom"
 import { DoctorContext } from "../context/DoctorContext"
 import { AdminContext } from "../context/AdminContext"
+import { LayoutDashboard, Calendar, Plus, Users, BarChart3, User } from "lucide-react"
+import { motion } from "framer-motion"
 
 const Sidebar = () => {
   const { dToken } = useContext(DoctorContext)
   const { aToken } = useContext(AdminContext)
 
-  return (
-    <div className="min-h-screen bg-white border-r">
-      {aToken && (
-        <ul className="text-[#515151] mt-5">
-          <NavLink
-            to={"/admin-dashboard"}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
-            }
-          >
-            <img className="min-w-5" src={assets.home_icon || "/placeholder.svg"} alt="" />
-            <p className="hidden md:block">Dashboard</p>
-          </NavLink>
-          <NavLink
-            to={"/all-appointments"}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
-            }
-          >
-            <img className="min-w-5" src={assets.appointment_icon || "/placeholder.svg"} alt="" />
-            <p className="hidden md:block">Appointments</p>
-          </NavLink>
-          <NavLink
-            to={"/add-doctor"}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
-            }
-          >
-            <img className="min-w-5" src={assets.add_icon || "/placeholder.svg"} alt="" />
-            <p className="hidden md:block">Add Doctor</p>
-          </NavLink>
-          <NavLink
-            to={"/doctor-list"}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
-            }
-          >
-            <img className="min-w-5" src={assets.people_icon || "/placeholder.svg"} alt="" />
-            <p className="hidden md:block">Doctors List</p>
-          </NavLink>
-          <NavLink
-            to={"/analytics"}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
-            }
-          >
-            <img className="min-w-5 w-5 h-5 object-contain" src={assets.analytics_icon || "/placeholder.svg"} alt="" />
-            <p className="hidden md:block">Analytics</p>
-          </NavLink>
-        </ul>
-      )}
+  const adminMenuItems = [
+    { icon: LayoutDashboard, label: "Dashboard", path: "/admin-dashboard" },
+    { icon: Calendar, label: "Appointments", path: "/all-appointments" },
+    { icon: Plus, label: "Add Doctor", path: "/add-doctor" },
+    { icon: Users, label: "Doctors List", path: "/doctor-list" },
+    { icon: BarChart3, label: "Analytics", path: "/analytics" },
+  ]
 
-      {dToken && (
-        <ul className="text-[#515151] mt-5">
-          <NavLink
-            to={"/doctor-dashboard"}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
-            }
-          >
-            <img className="min-w-5" src={assets.home_icon || "/placeholder.svg"} alt="" />
-            <p className="hidden md:block">Dashboard</p>
-          </NavLink>
-          <NavLink
-            to={"/doctor-appointments"}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
-            }
-          >
-            <img className="min-w-5" src={assets.appointment_icon || "/placeholder.svg"} alt="" />
-            <p className="hidden md:block">Appointments</p>
-          </NavLink>
-          <NavLink
-            to={"/doctor-profile"}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
-            }
-          >
-            <img className="min-w-5" src={assets.people_icon || "/placeholder.svg"} alt="" />
-            <p className="hidden md:block">Profile</p>
-          </NavLink>
-        </ul>
-      )}
+  const doctorMenuItems = [
+    { icon: LayoutDashboard, label: "Dashboard", path: "/doctor-dashboard" },
+    { icon: Calendar, label: "Appointments", path: "/doctor-appointments" },
+    { icon: User, label: "Profile", path: "/doctor-profile" },
+  ]
+
+  const menuItems = aToken ? adminMenuItems : doctorMenuItems
+
+  return (
+    <div className="min-h-screen bg-white border-r border-gray-100 w-full md:w-72">
+      <nav className="pt-4">
+        {menuItems.map((item, index) => {
+          const Icon = item.icon
+          return (
+            <NavLink
+              key={index}
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center gap-3 py-4 px-4 md:px-6 cursor-pointer transition-all relative group ${
+                  isActive
+                    ? "text-primary bg-primary/10"
+                    : "text-text-secondary hover:text-text-primary hover:bg-gray-50"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  {/* Active Indicator */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary"
+                    />
+                  )}
+                  
+                  <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? "text-primary" : ""}`} />
+                  <p className={`hidden md:block font-medium text-sm ${isActive ? "font-semibold text-primary" : ""}`}>
+                    {item.label}
+                  </p>
+                </>
+              )}
+            </NavLink>
+          )
+        })}
+      </nav>
     </div>
   )
 }
