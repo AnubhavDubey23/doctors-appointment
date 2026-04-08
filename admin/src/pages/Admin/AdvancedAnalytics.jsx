@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect, useContext } from "react"
 import { AdminContext } from "../../context/AdminContext"
 import AnalyticsChart from "../../components/AnalyticsChart"
