@@ -230,11 +230,15 @@ const seedDatabase = async () => {
 
     const timeSlots = ["09:00 am", "10:00 am", "11:00 am", "02:00 pm", "03:00 pm", "04:00 pm", "05:00 pm"]
 
-    for (let i = 0; i < 25; i++) {
+    // Generate appointments spread across the last 12 months for meaningful analytics
+    const twelveMonthsAgo = new Date()
+    twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12)
+
+    for (let i = 0; i < 60; i++) {
       const user = getRandomElement(users)
       const doctor = getRandomElement(doctors)
       const status = getRandomElement(appointmentStatuses)
-      const appointmentDate = getRandomDate(new Date(2024, 0, 1), new Date(2024, 11, 31))
+      const appointmentDate = getRandomDate(twelveMonthsAgo, new Date())
 
       const appointment = new appointmentModel({
         userId: user._id.toString(),

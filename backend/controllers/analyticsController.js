@@ -23,7 +23,7 @@ const getAnalytics = async (req, res) => {
       const nextDate = new Date(currentYear, currentMonth - i + 1, 1)
 
       const count = await appointmentModel.countDocuments({
-        date: { $gte: date, $lt: nextDate },
+        date: { $gte: date.getTime(), $lt: nextDate.getTime() },
       })
 
       monthlyAppointments.push({
@@ -54,7 +54,7 @@ const getAnalytics = async (req, res) => {
       const revenue = await appointmentModel.aggregate([
         {
           $match: {
-            date: { $gte: date, $lt: nextDate },
+            date: { $gte: date.getTime(), $lt: nextDate.getTime() },
             payment: true,
             cancelled: false,
           },
@@ -173,7 +173,7 @@ const getDoctorAnalytics = async (req, res) => {
 
       const count = await appointmentModel.countDocuments({
         docId,
-        date: { $gte: date, $lt: nextDate },
+        date: { $gte: date.getTime(), $lt: nextDate.getTime() },
       })
 
       monthlyAppointments.push({
