@@ -1,5 +1,3 @@
-"use client"
-
 import { createContext, useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import axios from "axios"
@@ -10,9 +8,6 @@ const AppContextProvider = (props) => {
   const currencySymbol = "₹"
   const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-  console.log("[v0] Frontend backendUrl:", backendUrl)
-  console.log("[v0] All env vars:", import.meta.env)
-
   const [doctors, setDoctors] = useState([])
   const [token, setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : "")
   const [userData, setUserData] = useState(false)
@@ -20,8 +15,6 @@ const AppContextProvider = (props) => {
   // Getting Doctors using API
   const getDoctosData = async () => {
     try {
-      console.log("[v0] Making API call to:", backendUrl + "/api/doctor/list")
-
       const { data } = await axios.get(backendUrl + "/api/doctor/list")
       if (data.success) {
         setDoctors(data.doctors)
@@ -29,7 +22,7 @@ const AppContextProvider = (props) => {
         toast.error(data.message)
       }
     } catch (error) {
-      console.log("[v0] API Error:", error)
+      console.log(error)
       toast.error(error.message)
     }
   }

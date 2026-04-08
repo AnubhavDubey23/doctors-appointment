@@ -6,10 +6,6 @@ const AppContextProvider = (props) => {
   const currency = import.meta.env.VITE_CURRENCY
   const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-  console.log("[v0] Admin backendUrl:", backendUrl)
-  console.log("[v0] Admin currency:", currency)
-  console.log("[v0] All admin env vars:", import.meta.env)
-
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   // Function to format the date eg. ( 20_01_2000 => 20 Jan 2000 )
