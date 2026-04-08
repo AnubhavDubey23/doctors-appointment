@@ -29,7 +29,12 @@ connectDB()
 connectCloudinary()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:5173',
+    process.env.ADMIN_URL || 'http://localhost:5174'
+  ]
+}))
 
 app.use("/api/user", userRouter)
 app.use("/api/admin", adminRouter)
